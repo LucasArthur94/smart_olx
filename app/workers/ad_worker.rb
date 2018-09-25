@@ -1,0 +1,40 @@
+require 'open-uri'
+
+class AdWorker
+  include Sidekiq::Worker
+
+  def perform()
+    find_ads(%w[macbook pro 16gb], 1)
+  end
+
+  private
+
+  def find_ads(words, current_page)
+    query = words.split.join("+")
+
+    results = Nokogiri::HTML(open("https://sp.olx.com.br/sao-paulo-e-regiao?o=#{current_page}&q=#{query}")).at_css("ul[id='main-ad-list']").css('li')
+    results.map do |result|
+      olx_url = result.css(".OLXad-list-link").xpath("@href")&.first&.value
+      olx_id = result.css(".OLXad-list-link").xpath("@id")&.first&.value
+      title = result.css(".OLXad-list-link").xpath("@title")&.first&.value
+      string_price = result.css(".OLXad-list-price").text
+      price = string_price&.gsub!(' R$ ', '')&.gsub!(".", "") if string_price
+
+      existing_ad = Ad.find({ olx_id: olx_id })
+
+      if existing_ad
+        if existing_ad.price != price
+          existing_ad.price = price
+          existing_ad.is_new = true
+          existing_ad.save
+        else
+          existing_ad.is_new = false
+        end
+        existing_ad.save
+      else
+        new_ad = Ad.new({ price: price, olx_url: olx_url, title: title, olx_id: olx_id, is_new: true })
+        new_ad.save!
+      end
+    end
+  end
+end

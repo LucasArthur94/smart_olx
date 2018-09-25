@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <p id="notice"><%= notice %></p>
+
+  <h1 class="text-center">Lista de Anúncios Gerados</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3">Título</th>
+        <th colspan="3">Preço</th>
+        <th colspan="3">ID OLX</th>
+        <th colspan="3">É novo?</th>
+        <th colspan="3">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @ads.each do |ad| %>
+        <tr>
+          <td><%= ad.title %></td>
+          <td><%= ad.price %></td>
+          <td><%= ad.olx_id %></td>
+          <td><%= ad.is_new %></td>
+          <td>
+            <%= link_to 'Ver anúncio', ad.olx_url %> |
+            <%= link_to 'Destruir', ad, method: :delete, data: { confirm: 'Certeza?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

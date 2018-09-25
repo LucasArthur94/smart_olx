@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart Lero-Lero</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id='title' class='container-fluid text-center'>
+      <h1>Acompanhamento de Anúncios do OLX</h1>
+      <cite>Projetado para acompanhar Macbook Pro 15'</cite>
+    </div>
+    <div class='container-fluid'>
+      <%= yield %>
+    </div>
+  </body>
+</html>
