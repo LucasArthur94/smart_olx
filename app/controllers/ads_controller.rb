@@ -4,7 +4,7 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    @ads = Ad.order(is_new: :desc)
+    @ads = Ad.order(is_new: :desc, price: :asc)
   end
 
   # DELETE /ads/1
