@@ -4,8 +4,7 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    AdWorker.perform_async()
-    @ads = Ad.all
+    @ads = Ad.order(is_new: :desc)
   end
 
   # DELETE /ads/1
