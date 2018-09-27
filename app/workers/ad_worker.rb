@@ -24,6 +24,7 @@ class AdWorker
       price = string_price&.gsub!(' R$ ', '')&.gsub!(".", "") if string_price
 
       existing_ad = Ad.find_by(olx_id: olx_id)
+      contains_relevant_keywords = title =~ /mac book pro/i or title =~ /macbook pro/i or title =~ /mac bookpro/i or title =~ /macbookpro/i
 
       if existing_ad
         if existing_ad.price != price.to_f
@@ -33,7 +34,7 @@ class AdWorker
           existing_ad.is_new = false
         end
         existing_ad.save
-      elsif olx_url and olx_id and title and price
+      elsif olx_url and olx_id and title and price and (title) and contains_relevant_keywords
         new_ad = Ad.new({ price: price, olx_url: olx_url, title: title, olx_id: olx_id, is_new: true })
         new_ad.save
       end
