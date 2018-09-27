@@ -4,7 +4,8 @@ class AdWorker
   include Sidekiq::Worker
 
   def perform()
-    find_ads(%w[macbook pro 16gb], 1)
+    find_ads(%w[macbook pro], 1)
+    find_ads(%w[mac book pro], 1)
   end
 
   private
