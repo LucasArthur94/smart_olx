@@ -24,7 +24,7 @@ class AdWorker
       price = string_price&.gsub!(' R$ ', '')&.gsub!(".", "") if string_price
 
       existing_ad = Ad.find_by(olx_id: olx_id)
-      contains_relevant_keywords = title =~ /mac book pro/i or title =~ /macbook pro/i or title =~ /mac bookpro/i or title =~ /macbookpro/i
+      contains_relevant_keywords = (title =~ /mac book pro/i or title =~ /macbook pro/i or title =~ /mac bookpro/i or title =~ /macbookpro/i)
 
       if existing_ad
         if existing_ad.price != price.to_f
