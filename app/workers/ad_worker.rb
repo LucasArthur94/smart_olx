@@ -30,10 +30,11 @@ class AdWorker
         if existing_ad.price != price.to_f
           existing_ad.price = price
           existing_ad.is_new = true
-        else
+          existing_ad.save
+        elsif !existing_ad.is_new
           existing_ad.is_new = false
+          existing_ad.save
         end
-        existing_ad.save
       elsif olx_url and olx_id and title and price and (title) and contains_relevant_keywords
         new_ad = Ad.new({ price: price, olx_url: olx_url, title: title, olx_id: olx_id, is_new: true })
         new_ad.save
