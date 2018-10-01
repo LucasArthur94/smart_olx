@@ -1,0 +1,30 @@
+.col-md-12
+  p#notice
+    = notice
+  h1.text-center Lista de Anúncios Gerados
+  table.table
+    thead
+      tr
+        th Título
+        th Preço
+        th ID OLX
+        th É novo?
+        th colspan="3" Ações
+    tbody
+      - @ads.each do |ad|
+        tr
+          td
+            = ad.title
+          td
+            = ad.price
+          td
+            = ad.olx_id
+          td
+            - if ad.is_new
+              | Sim
+            - else
+              | Não
+          td
+            = link_to 'Ver anúncio ', ad.olx_url
+            | |
+            = link_to ' Destruir', ad, method: :delete, data: { confirm: 'Certeza?' }
