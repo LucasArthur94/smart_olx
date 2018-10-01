@@ -4,7 +4,7 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    @ads = Ad.order(is_new: :desc, price: :asc, created_at: :desc)
+    @ads = Ad.order(is_new: :desc, price: :asc, created_at: :desc).page(params[:page])
   end
 
   # DELETE /ads/1
@@ -25,6 +25,6 @@ class AdsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ad_params
-      params.require(:ad).permit(:title, :olx_id, :is_new)
+      params.require(:ad).permit(:title, :olx_id, :is_new, :page)
     end
 end
