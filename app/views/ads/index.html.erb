@@ -20,7 +20,13 @@
           <td><%= ad.title %></td>
           <td><%= ad.price %></td>
           <td><%= ad.olx_id %></td>
-          <td><%= ad.is_new %></td>
+          <td>
+            <% if ad.is_new %>
+              Sim
+            <% else %>
+              Não
+            <% end %>
+          </td>
           <td>
             <%= link_to 'Ver anúncio', ad.olx_url %> |
             <%= link_to 'Destruir', ad, method: :delete, data: { confirm: 'Certeza?' } %>
