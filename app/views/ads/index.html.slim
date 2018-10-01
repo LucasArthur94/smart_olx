@@ -5,10 +5,14 @@
   table.table
     thead
       tr
-        th Título
-        th Preço
-        th ID OLX
-        th É novo?
+        th
+          = sortable "title", "Título"
+        th
+          = sortable "price", "Preço"
+        th
+          = sortable "olx_id", "ID OLX"
+        th
+          = sortable "is_new", "É novo?"
         th colspan="3" Ações
     tbody
       - @ads.each do |ad|
