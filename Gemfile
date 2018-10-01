@@ -45,6 +45,8 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 # HTTP Request
 gem 'httparty'
+# Kaminari for pagination
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
