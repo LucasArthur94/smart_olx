@@ -29,7 +29,7 @@
             - else
               | Não
           td
-            = link_to 'Ver anúncio ', ad.olx_url
+            = link_to 'Ver anúncio ', ad.olx_url, target: "_blank"
             | |
             = link_to ' Destruir', ad, method: :delete, data: { confirm: 'Certeza?' }
   = paginate @ads
